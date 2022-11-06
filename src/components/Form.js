@@ -16,7 +16,6 @@ export default function Form() {
 
   // listen for edit mode active
   useEffect(() => {
-    console.log(editing);
     const { id, name, type, amount } = editing || {};
     if (id) {
       setEditMode(true);

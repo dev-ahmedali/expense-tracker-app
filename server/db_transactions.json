@@ -1,22 +1,10 @@
 {
   "transactions": [
     {
-      "name": "tuition",
-      "type": "income",
-      "amount": "40000",
-      "id": 1
-    },
-    {
       "name": "girlfriend expense",
       "type": "expense",
       "amount": 5000,
       "id": 2
-    },
-    {
-      "name": "salary from facebook",
-      "type": "income",
-      "amount": "600000",
-      "id": 3
     }
   ]
 }
