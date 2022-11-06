@@ -82,7 +82,7 @@ input {
     outline: none;
     cursor: pointer;
     padding: 10px;
-    background-color: #4338ca;
+    background: #372acd;
     color: white;
     transition: background-color 0.3s ease;
 }
@@ -180,6 +180,11 @@ label {
 .conatiner_of_list_of_transactions ul {
     max-height: 500px;
     overflow-y: auto;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
 }
 
 @media (max-width: 450px) {

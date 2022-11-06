@@ -7,9 +7,7 @@ export default function Form() {
   const [type, setType] = useState('');
   const [amount, setAmount] = useState('');
   const dispatch = useDispatch();
-  const { isLoading, isError } = useSelector(
-    (state) => state.transaction
-  );
+  const { isLoading, isError } = useSelector((state) => state.transaction);
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -73,7 +71,7 @@ export default function Form() {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button disabled={isLoading} className="btn" type="submit">
+        <button type="submit" disabled={isLoading} className="btn">
           Add Transaction
         </button>
         {!isLoading && isError && (
