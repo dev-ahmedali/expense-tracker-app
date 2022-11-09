@@ -1,12 +1,6 @@
 {
   "transactions": [
     {
-      "name": "girlfriend expense",
-      "type": "expense",
-      "amount": 5000,
-      "id": 2
-    },
-    {
       "name": "salary",
       "type": "income",
       "amount": 60000,
@@ -17,6 +11,30 @@
       "type": "income",
       "amount": 20000,
       "id": 4
+    },
+    {
+      "name": "family expense",
+      "type": "expense",
+      "amount": 15000,
+      "id": 5
+    },
+    {
+      "name": "salary from google",
+      "type": "income",
+      "amount": 1000000,
+      "id": 6
+    },
+    {
+      "name": "home ",
+      "type": "expense",
+      "amount": 500000,
+      "id": 7
+    },
+    {
+      "name": "test",
+      "type": "income",
+      "amount": 20000,
+      "id": 8
     }
   ]
 }

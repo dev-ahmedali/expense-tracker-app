@@ -1,15 +1,19 @@
 import React from 'react';
 import Layout from './components/Layout';
-import Balance from './components/Balance';
-import Form from './components/Form';
-import Transactions from './components/transaction/Transactions';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from './pages/Home';
+import TransactionList from './pages/TransactionList';
 
 function App() {
   return (
     <Layout>
-      <Balance/>
-      <Form/>
-      <Transactions/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/transactions" element={<TransactionList />} />
+        </Routes>
+      </Router>
+     
     </Layout>
   );
 }

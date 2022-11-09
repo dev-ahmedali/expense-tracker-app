@@ -12,13 +12,14 @@ const initialState = {
   isError: false,
   error: '',
   editing: {},
+  totalCount: 1,
 };
 // async thunk
 
 export const fetchTransactions = createAsyncThunk(
   'transaction/fetchTransactions',
-  async () => {
-    const transactions = await getTransaction();
+  async ({ limit } = { limit: 5 }) => {
+    const transactions = await getTransaction({ limit });
     return transactions;
   }
 );
@@ -70,6 +71,7 @@ const transactionSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.transactions = action.payload;
+        state.totalCount = Number(action.payload.totalCount);
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
         state.isLoading = false;
@@ -115,7 +117,7 @@ const transactionSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(removeTransaction.fulfilled, (state, action) => {
-        console.log(action)
+        console.log(action);
         state.isError = false;
         state.isLoading = false;
 
@@ -132,4 +134,4 @@ const transactionSlice = createSlice({
 });
 
 export default transactionSlice.reducer;
-export const {editActive, editInActive} = transactionSlice.actions 
+export const { editActive, editInActive } = transactionSlice.actions;

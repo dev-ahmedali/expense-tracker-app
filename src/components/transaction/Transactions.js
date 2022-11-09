@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Transaction from './Transaction';
 import {fetchTransactions} from "../../features/transaction/transactionSlice"
+// import { Link } from 'react-router-dom';
 
 export default function Transactions() {
   const dispatch = useDispatch()
@@ -22,7 +23,7 @@ export default function Transactions() {
   }
 
   if(!isLoading && !isError && transactions?.length > 0) {
-    content = transactions.map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)
+    content = transactions.slice(0, 5).map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)
   }
 
   if(!isLoading && !isError && transactions?.length === 0) {
@@ -36,6 +37,18 @@ export default function Transactions() {
         <ul>
           {content}
         </ul>
+        {/* <Link
+            to=""
+            className="btn"
+            style={{
+              textAlign: 'center',
+              background: 'mediumseagreen',
+              display: 'block',
+              textDecoration: 'none',
+            }}
+          >
+            View All
+          </Link> */}
       </div>
     </>
   );
