@@ -36,5 +36,8 @@
       "amount": 20000,
       "id": 8
     }
-  ]
+  ],
+  "balance": {
+    "totalBalance": 70000
+  }
 }

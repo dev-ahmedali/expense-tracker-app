@@ -13,6 +13,8 @@ const initialState = {
   error: '',
   editing: {},
   totalCount: 1,
+  balance: 0,
+  modalEdit: false
 };
 // async thunk
 

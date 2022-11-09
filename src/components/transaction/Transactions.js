@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Transaction from './Transaction';
 import {fetchTransactions} from "../../features/transaction/transactionSlice"
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Transactions() {
   const dispatch = useDispatch()
@@ -37,8 +37,8 @@ export default function Transactions() {
         <ul>
           {content}
         </ul>
-        {/* <Link
-            to=""
+        <Link
+            to="/transactions"
             className="btn"
             style={{
               textAlign: 'center',
@@ -48,7 +48,7 @@ export default function Transactions() {
             }}
           >
             View All
-          </Link> */}
+          </Link>
       </div>
     </>
   );

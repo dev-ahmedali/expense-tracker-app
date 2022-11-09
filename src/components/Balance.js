@@ -10,9 +10,9 @@ export default function Balance() {
     transactions.forEach((transaction) => {
       const { type, amount } = transaction;
       if (type === 'income') {
-        income = income + amount;
+        income += amount;
       } else {
-        income = income - amount;
+        income -= amount;
       }
     });
     return income;
