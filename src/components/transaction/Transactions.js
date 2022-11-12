@@ -1,43 +1,46 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Transaction from './Transaction';
-import {fetchTransactions} from "../../features/transaction/transactionSlice"
+import { fetchTransactions } from '../../features/transaction/transactionSlice';
 import { Link } from 'react-router-dom';
 
 export default function Transactions() {
-  const dispatch = useDispatch()
-  const { isLoading, transactions, isError } = useSelector(
+  const dispatch = useDispatch();
+  const { isLoading, transactions, isError, totalCount } = useSelector(
     (state) => state.transaction
   );
 
   useEffect(() => {
-    dispatch(fetchTransactions())
-  }, [dispatch])
+    dispatch(fetchTransactions());
+  }, [dispatch]);
 
   // decide what to render
   let content = null;
-  if(isLoading) content = <p>Loading...</p>
+  if (isLoading) content = <p>Loading...</p>;
 
-  if(!isLoading && isError) {
-    content = <p className='error'>Thare was an error occured</p>
+  if (!isLoading && isError) {
+    content = <p className="error">Thare was an error occured</p>;
   }
 
-  if(!isLoading && !isError && transactions?.length > 0) {
-    content = transactions.slice(0, 5).map((transaction) => <Transaction key={transaction.id} transaction={transaction}/>)
+  if (!isLoading && !isError && transactions?.length > 0) {
+    content = transactions
+      .slice(0, 5)
+      .map((transaction) => (
+        <Transaction key={transaction.id} transaction={transaction} />
+      ));
   }
 
-  if(!isLoading && !isError && transactions?.length === 0) {
-    content = <p>No transactions found</p>
+  if (!isLoading && !isError && transactions?.length === 0) {
+    content = <p>No transactions found</p>;
   }
   return (
     <>
       <p className="second_heading">Your Transactions:</p>
 
       <div className="conatiner_of_list_of_transactions">
-        <ul>
-          {content}
-        </ul>
-        <Link
+        <ul>{content}</ul>
+        {(totalCount > 5 || transactions.length > 5) && (
+          <Link
             to="/transactions"
             className="btn"
             style={{
@@ -49,6 +52,7 @@ export default function Transactions() {
           >
             View All
           </Link>
+        )}
       </div>
     </>
   );

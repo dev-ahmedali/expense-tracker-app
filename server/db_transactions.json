@@ -25,19 +25,13 @@
       "id": 6
     },
     {
-      "name": "home ",
-      "type": "expense",
-      "amount": 500000,
-      "id": 7
-    },
-    {
       "name": "test",
-      "type": "income",
-      "amount": 20000,
-      "id": 8
+      "type": "expense",
+      "amount": 200,
+      "id": 7
     }
   ],
   "balance": {
-    "totalBalance": 70000
+    "totalBalance": 69800
   }
 }

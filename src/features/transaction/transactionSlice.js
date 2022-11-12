@@ -14,14 +14,21 @@ const initialState = {
   editing: {},
   totalCount: 1,
   balance: 0,
-  modalEdit: false
+  modalEdit: false,
 };
 // async thunk
 
 export const fetchTransactions = createAsyncThunk(
   'transaction/fetchTransactions',
-  async ({ limit } = { limit: 5 }) => {
-    const transactions = await getTransaction({ limit });
+  async (
+    { limit, search, type, currentPage } = { currentPage: 1, limit: 5 }
+  ) => {
+    const transactions = await getTransaction({
+      limit,
+      currentPage,
+      search,
+      type,
+    });
     return transactions;
   }
 );
@@ -62,6 +69,12 @@ const transactionSlice = createSlice({
     editInActive: (state) => {
       state.editing = {};
     },
+    setModalEdit: (state) => {
+      state.modalEdit = true;
+    },
+    cancelModalEdit: (state) => {
+      state.modalEdit = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,6 +86,7 @@ const transactionSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.transactions = action.payload;
+        state.balance = action.payload.balance;
         state.totalCount = Number(action.payload.totalCount);
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
@@ -89,7 +103,8 @@ const transactionSlice = createSlice({
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
-        state.transactions.push(action.payload);
+        state.transactions.push(action.payload.transaction);
+        state.balance = action.payload.balance;
       })
       .addCase(createTransaction.rejected, (state, action) => {
         state.isLoading = false;
@@ -108,6 +123,7 @@ const transactionSlice = createSlice({
           (t) => t.id === action.payload.id
         );
         state.transactions[indexToUpdate] = action.payload;
+        state.balance = action.payload.balance;
       })
       .addCase(changeTransaction.rejected, (state, action) => {
         state.isLoading = false;
@@ -122,10 +138,10 @@ const transactionSlice = createSlice({
         console.log(action);
         state.isError = false;
         state.isLoading = false;
-
         state.transactions = state.transactions.filter(
           (t) => t.id !== action.meta.arg
         );
+        state.balance = action.payload.balance;
       })
       .addCase(removeTransaction.rejected, (state, action) => {
         state.isLoading = false;
@@ -136,4 +152,5 @@ const transactionSlice = createSlice({
 });
 
 export default transactionSlice.reducer;
-export const { editActive, editInActive } = transactionSlice.actions;
+export const { editActive, editInActive, setModalEdit, cancelModalEdit } =
+  transactionSlice.actions;
