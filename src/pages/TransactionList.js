@@ -23,13 +23,13 @@ export default function TransactionList() {
     filter: {
       search,
       type,
-      Pagination: { currenPage, limit },
+      pagination: { currentPage, limit },
     },
   } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(fetchTransactions({ currenPage, limit, search, type }));
-  }, [currenPage, limit, search, type, dispatch]);
+    dispatch(fetchTransactions({ currentPage, limit, search, type }));
+  }, [currentPage, limit, search, type, dispatch]);
 
   const searchHandler = (e) => {
     e.preventDefault();

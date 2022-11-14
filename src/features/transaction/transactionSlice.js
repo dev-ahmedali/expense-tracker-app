@@ -8,24 +8,24 @@ import {
 
 const initialState = {
   transactions: [],
+  balance: 0,
+  totalCount: 1,
   isLoading: false,
   isError: false,
   error: '',
   editing: {},
-  totalCount: 1,
-  balance: 0,
   modalEdit: false,
 };
-// async thunk
 
+// async thunks
 export const fetchTransactions = createAsyncThunk(
   'transaction/fetchTransactions',
   async (
-    { limit, search, type, currentPage } = { currentPage: 1, limit: 5 }
+    { currentPage, limit, search, type } = { currentPage: 1, limit: 5 }
   ) => {
     const transactions = await getTransaction({
-      limit,
       currentPage,
+      limit,
       search,
       type,
     });
@@ -57,8 +57,7 @@ export const removeTransaction = createAsyncThunk(
   }
 );
 
-// create slice--
-
+// create slice
 const transactionSlice = createSlice({
   name: 'transaction',
   initialState,
@@ -85,7 +84,7 @@ const transactionSlice = createSlice({
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
-        state.transactions = action.payload;
+        state.transactions = action.payload.transactions;
         state.balance = action.payload.balance;
         state.totalCount = Number(action.payload.totalCount);
       })
@@ -95,15 +94,13 @@ const transactionSlice = createSlice({
         state.error = action.error?.message;
         state.transactions = [];
       })
-
       .addCase(createTransaction.pending, (state) => {
         state.isError = false;
-        state.isLoading = true;
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
-        state.transactions.push(action.payload.transaction);
+        state.transactions.unshift(action.payload.transaction);
         state.balance = action.payload.balance;
       })
       .addCase(createTransaction.rejected, (state, action) => {
@@ -113,16 +110,16 @@ const transactionSlice = createSlice({
       })
       .addCase(changeTransaction.pending, (state) => {
         state.isError = false;
-        state.isLoading = true;
       })
       .addCase(changeTransaction.fulfilled, (state, action) => {
         state.isError = false;
         state.isLoading = false;
 
         const indexToUpdate = state.transactions.findIndex(
-          (t) => t.id === action.payload.id
+          (t) => t.id === action.payload.transaction.id
         );
-        state.transactions[indexToUpdate] = action.payload;
+
+        state.transactions[indexToUpdate] = action.payload.transaction;
         state.balance = action.payload.balance;
       })
       .addCase(changeTransaction.rejected, (state, action) => {
@@ -135,9 +132,9 @@ const transactionSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(removeTransaction.fulfilled, (state, action) => {
-        console.log(action);
         state.isError = false;
         state.isLoading = false;
+
         state.transactions = state.transactions.filter(
           (t) => t.id !== action.meta.arg
         );

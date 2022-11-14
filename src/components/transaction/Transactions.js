@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Transactions() {
   const dispatch = useDispatch();
-  const { isLoading, transactions, isError, totalCount } = useSelector(
+  const { transactions, isLoading, isError, totalCount } = useSelector(
     (state) => state.transaction
   );
 
@@ -18,9 +18,8 @@ export default function Transactions() {
   let content = null;
   if (isLoading) content = <p>Loading...</p>;
 
-  if (!isLoading && isError) {
-    content = <p className="error">Thare was an error occured</p>;
-  }
+  if (!isLoading && isError)
+    content = <p className="error">There was an error occured</p>;
 
   if (!isLoading && !isError && transactions?.length > 0) {
     content = transactions
@@ -31,8 +30,9 @@ export default function Transactions() {
   }
 
   if (!isLoading && !isError && transactions?.length === 0) {
-    content = <p>No transactions found</p>;
+    content = <p>No transactions found!</p>;
   }
+
   return (
     <>
       <p className="second_heading">Your Transactions:</p>

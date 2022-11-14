@@ -4,34 +4,25 @@
       "name": "salary",
       "type": "income",
       "amount": 60000,
-      "id": 3
-    },
-    {
-      "name": "upori income",
-      "type": "income",
-      "amount": 20000,
-      "id": 4
+      "id": 1
     },
     {
       "name": "family expense",
       "type": "expense",
-      "amount": 15000,
-      "id": 5
+      "amount": 30000,
+      "id": 2
     },
     {
-      "name": "salary from google",
+      "name": "upori income",
       "type": "income",
-      "amount": 1000000,
-      "id": 6
-    },
-    {
-      "name": "test",
-      "type": "expense",
-      "amount": 200,
-      "id": 7
+      "amount": 50000,
+      "id": 3
     }
+    
+   
+    
   ],
   "balance": {
-    "totalBalance": 69800
+    "totalBalance": 198690
   }
 }

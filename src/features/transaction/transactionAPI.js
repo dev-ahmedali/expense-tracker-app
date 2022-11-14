@@ -5,10 +5,10 @@ export const getTransaction = async (
 ) => {
   let queryString = '';
   if (search) {
-    queryString = queryString + `&name_like=${search}`;
+    queryString += `&name_like=${search}`;
   }
   if (type) {
-    queryString = queryString + `&type=${type}`;
+    queryString += `&type=${type}`;
   }
 
   const response = await axios.get(
@@ -31,13 +31,13 @@ export const addTransaction = async (data) => {
     data.type === 'income'
       ? Number(balanceResponse.data.totalBalance) + Number(data.amount)
       : Number(balanceResponse.data.totalBalance) - Number(data.amount);
-  const updateBalance = await axios.put('/balance', {
+  const updatedBalance = await axios.put('/balance', {
     totalBalance: newBalance,
   });
 
   return {
-    transactions: response.data,
-    balance: updateBalance.data.totalBalance,
+    transaction: response.data,
+    balance: updatedBalance.data.totalBalance,
   };
 };
 
@@ -63,20 +63,20 @@ export const editTransaction = async (id, data) => {
     }
   }
 
-  const updateBalance = await axios.put('/balance', {
+  const updatedBalance = await axios.put('/balance', {
     totalBalance: newBalance,
   });
 
   return {
     transaction: response.data,
-    balance: updateBalance.data.totalBalance,
+    balance: updatedBalance.data.totalBalance,
   };
 };
 
 export const deleteTransaction = async (id) => {
   const balanceResponse = await axios.get('/balance');
   const itemResponse = await axios.get(`/transactions/${id}`);
-  const response = await axios.delete(`/transactions/${id}`);
+  const response = axios.delete(`/transactions/${id}`);
 
   const newBalance =
     itemResponse.data.type === 'income'
@@ -84,10 +84,11 @@ export const deleteTransaction = async (id) => {
         Number(itemResponse.data.amount)
       : Number(balanceResponse.data.totalBalance) +
         Number(itemResponse.data.amount);
-  const updateBalance = await axios.put('/balance', { balace: newBalance });
-
+  const updatedBalance = await axios.put('/balance', {
+    totalBalance: newBalance,
+  });
   return {
     deletedTransaction: response.data,
-    balance: updateBalance.data.totalBalance,
+    balance: updatedBalance.data.totalBalance,
   };
 };

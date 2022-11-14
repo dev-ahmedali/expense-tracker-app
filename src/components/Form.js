@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  cancelModalEdit,
   changeTransaction,
   createTransaction,
 } from '../features/transaction/transactionSlice';
@@ -49,6 +50,7 @@ export default function Form() {
   const cancelEditMode = () => {
     reset();
     setEditMode(false);
+    dispatch(cancelModalEdit());
   };
 
   const handleUpdate = (e) => {
@@ -66,7 +68,6 @@ export default function Form() {
     setEditMode(false);
     reset();
   };
-
   return (
     <div className="form">
       <h3>Add new transaction</h3>
