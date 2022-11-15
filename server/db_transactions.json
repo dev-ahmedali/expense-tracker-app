@@ -63,7 +63,7 @@
     {
       "name": "water  bill",
       "type": "expense",
-      "amount": 1500,
+      "amount": "2200",
       "id": 17
     },
     {
@@ -80,6 +80,6 @@
     }
   ],
   "balance": {
-    "totalBalance": 3092190
+    "totalBalance": 3091490
   }
 }

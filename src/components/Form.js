@@ -67,6 +67,7 @@ export default function Form() {
     );
     setEditMode(false);
     reset();
+    dispatch(cancelModalEdit())
   };
   return (
     <div className="form">
