@@ -1,7 +1,7 @@
 import axios from '../../utils/axios';
 
-export const getTransaction = async (
-  { currentPage, search, type, limit } = { currentPage: 1, limit: 5 }
+export const getTransactions = async (
+  { currentPage, limit, search, type } = { currentPage: 1, limit: 5 }
 ) => {
   let queryString = '';
   if (search) {
@@ -10,15 +10,14 @@ export const getTransaction = async (
   if (type) {
     queryString += `&type=${type}`;
   }
-
   const response = await axios.get(
     `/transactions?_sort=id&_order=desc&_page=${currentPage}&_limit=${limit}${queryString}`
   );
   console.log(response);
-
   const balanceResponse = await axios.get('/balance');
+
   return {
-    transaction: response.data,
+    transactions: response.data,
     balance: balanceResponse.data.totalBalance,
     totalCount: response.headers['x-total-count'],
   };

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-  getTransaction,
+  getTransactions,
   addTransaction,
   editTransaction,
   deleteTransaction,
@@ -9,7 +9,7 @@ import {
 const initialState = {
   transactions: [],
   balance: 0,
-  totalCount: 1,
+  totalCount: 1, 
   isLoading: false,
   isError: false,
   error: '',
@@ -23,7 +23,7 @@ export const fetchTransactions = createAsyncThunk(
   async (
     { currentPage, limit, search, type } = { currentPage: 1, limit: 5 }
   ) => {
-    const transactions = await getTransaction({
+    const transactions = await getTransactions({
       currentPage,
       limit,
       search,
@@ -77,23 +77,23 @@ const transactionSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTransactions.pending, (state) => {
-        state.isError = false;
-        state.isLoading = true;
-      })
-      .addCase(fetchTransactions.fulfilled, (state, action) => {
-        state.isError = false;
-        state.isLoading = false;
-        state.transactions = action.payload.transactions;
-        state.balance = action.payload.balance;
-        state.totalCount = Number(action.payload.totalCount);
-      })
-      .addCase(fetchTransactions.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.error?.message;
-        state.transactions = [];
-      })
+    .addCase(fetchTransactions.pending, (state) => {
+      state.isError = false;
+      state.isLoading = true;
+    })
+    .addCase(fetchTransactions.fulfilled, (state, action) => {
+      state.isError = false;
+      state.isLoading = false;
+      state.transactions = action.payload.transactions;
+      state.balance = action.payload.balance;
+      state.totalCount = Number(action.payload.totalCount);
+    })
+    .addCase(fetchTransactions.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.error = action.error?.message;
+      state.transactions = [];
+    })
       .addCase(createTransaction.pending, (state) => {
         state.isError = false;
       })

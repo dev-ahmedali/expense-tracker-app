@@ -1,28 +1,85 @@
 {
   "transactions": [
     {
-      "name": "salary",
+      "name": "test",
       "type": "income",
-      "amount": 60000,
+      "amount": 50000,
       "id": 1
+    },
+    {
+      "name": "coaching",
+      "type": "income",
+      "amount": 50000,
+      "id": 4
     },
     {
       "name": "family expense",
       "type": "expense",
-      "amount": 30000,
-      "id": 2
+      "amount": 50000,
+      "id": 7
     },
     {
-      "name": "upori income",
+      "name": "salary",
       "type": "income",
       "amount": 50000,
-      "id": 3
+      "id": 9
+    },
+    {
+      "name": "Salary from google",
+      "type": "income",
+      "amount": 1000000,
+      "id": 10
+    },
+    {
+      "name": "doctor visit",
+      "type": "expense",
+      "amount": 10000,
+      "id": 12
+    },
+    {
+      "name": "semister",
+      "type": "expense",
+      "amount": 80000,
+      "id": 13
+    },
+    {
+      "name": "cloth",
+      "type": "expense",
+      "amount": 15000,
+      "id": 14
+    },
+    {
+      "name": "food bill",
+      "type": "expense",
+      "amount": 5000,
+      "id": 15
+    },
+    {
+      "name": "project",
+      "type": "income",
+      "amount": "250000",
+      "id": 16
+    },
+    {
+      "name": "water  bill",
+      "type": "expense",
+      "amount": 1500,
+      "id": 17
+    },
+    {
+      "name": "business",
+      "type": "income",
+      "amount": 500000,
+      "id": 18
+    },
+    {
+      "name": "worker salary",
+      "type": "expense",
+      "amount": 100000,
+      "id": 19
     }
-    
-   
-    
   ],
   "balance": {
-    "totalBalance": 198690
+    "totalBalance": 3092190
   }
 }
